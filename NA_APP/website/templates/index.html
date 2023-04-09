@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>News Finder</title>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        {% if category == 'error' %}
+        <div class="alert alert-danger alert-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+  <div class="nav-bar">
+    <nav>
+      <a id="logout" href="/logout" class="Logout">Logout</a>
+    </nav>
+  </div>
+  <div class="search-bar-box">
+    <input type="text" name="search" placeholder="Search News..." id="search-input">
+    <button id="Search" type="submit" title="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <button id="Filter" onclick="toggleFilterOptions()" title="Filter"><i class="fas fa-filter"></i></button>
+  </div>
+  <div id="filter-popup">
+    <h3>Select Filters:</h3>
+    <div class="filter-option">
+      <input type="checkbox" id="filter-1" name="filter-1">
+      <span class="checkmark"></span>
+      <label for="filter-1">Old</label>
+    </div>
+    <div class="filter-option">
+      <input type="checkbox" id="filter-2" name="filter-2">
+      <span class="checkmark"></span>
+      <label for="filter-2">Latest</label>
+    </div>
+  </div>
+  <div class="article-container">
+    <!-- Articles go here -->
+  </div>
+  <div class="news-container">
+    <a href="http://www.nytimes.com">The New York Times</a>
+    <a href="http://www.wsj.com">Wall Street Journal</a>
+    <a href="http://www.washingtonpost.com">Washington Post</a>
+    <a href="http://www.latimes.com">Los Angeles Times</a>
+    <a href="http://www.bloomberg.com">Bloomberg Business</a>
+    <a href="http://www.theguardian.com">Guardian</a>
+    <a href="http://www.Forbes.com">Forbes</a>
+    <a href="http://www.time.com">TIME</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../static/script.js"></script>
+  <script src="../static/news.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

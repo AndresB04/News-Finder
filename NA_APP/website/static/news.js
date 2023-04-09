@@ -1,0 +1,42 @@
+// Get references to the HTML elements
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("Search");
+const articleContainer = document.createElement("div");
+articleContainer.classList.add("article-container");
+
+// Add event listener to the search button
+searchButton.addEventListener("click", () => {
+  // Get the search query entered by the user
+  const query = searchInput.value.trim();
+
+  // Construct the API request URL
+  const apiKey = "30242ad5b53749f38eb8b5f921c1fc32";
+  const apiUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=${apiKey}`;
+
+  // Remove the old articles
+  while (articleContainer.firstChild) {
+    articleContainer.removeChild(articleContainer.firstChild);
+  }
+
+  // Make the API request
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      // Extract the articles from the response data
+      const articles = data.articles;
+
+      // Display the articles in the HTML document
+      for (const article of articles) {
+        const articleElement = document.createElement("div");
+        articleElement.classList.add("article");
+        articleElement.innerHTML = `
+          <h2>${article.title}</h2>
+          <p>${article.description}</p>
+          <a href="${article.url}" target="_blank">Read more</a>
+        `;
+        articleContainer.appendChild(articleElement);
+      }
+      document.body.appendChild(articleContainer);
+    })
+    .catch(error => console.error(error));
+});
